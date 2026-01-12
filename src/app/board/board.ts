@@ -28,10 +28,17 @@ export class Board implements OnInit {
   }
   // newGame() -metodin suoritus käynnistää uuden pelin
   newGame() {
+    /*
+    if (this.winner == 'X') {
+      this.xIsNext == false;
+    } else {
+      this.xIsNext == true;
+    }*/
+    this.xIsNext = this.winner === 'X' ? false : true;
+
     // Kun uusi peli alkaa, pelin muuttujat alustetaan.
     // Squares-taulukkoon laitetaan 9 tyhjää paikkaa
     this.squares = Array(9).fill('');
-    this.xIsNext = true;
     this.winner = '';
     this.moves = 0;
     this.noWinner = '';
