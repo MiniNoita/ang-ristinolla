@@ -1,7 +1,17 @@
 <!-- (click) on event binding. Templaatin event on bindattu luokan metodiin-->
 <button (click)="newGame()">Uusi peli</button>
 
+<!-- Kappale näytetään vain jos winner on true eli winner on olemassa-->
+<!-- Muutettu niin, että, jos winner on olemassa, näytetään voittaja, jos voittajaa ei ole olemassa ja siirtoja on 9, on tasapeli. Muulloin näytetään, kenen vuoro on -->
+@if(winner){
+<p>Pelaaja {{ winner }} voitti pelin!</p>
+}@else if (noWinner) {
+<p>{{ noWinner }}</p>
+} @else {
 <p>Vuorossa pelaaja: {{ player }}</p>
+}
+
+<p>Siirtoja tehty: {{ moves }}</p>
 
 <!--Peli tehdään tämän divin sisälle. Sisällä olevat elementit on laitettu CSS-gridiin.-->
 <div class="board">
@@ -16,8 +26,3 @@
   <app-square [value]="val" (click)="makeMove($index)"> </app-square>
   }
 </div>
-
-<!-- Kappale näytetään vain jos winner on true eli winner on olemassa-->
-@if(winner){
-<p>Pelaaja {{ winner }} voitti pelin!</p>
-}
