@@ -5,6 +5,7 @@ sovelluslogiikan.
 
 import { Component, OnInit } from '@angular/core';
 import { Square } from '../square/square';
+import { ScoreService } from '../score.service';
 
 @Component({
   selector: 'app-board',
@@ -13,6 +14,7 @@ import { Square } from '../square/square';
   styleUrl: './board.css',
 })
 export class Board implements OnInit {
+  constructor(private scoreService: ScoreService) {}
   /*Voidaan luottaa siihen, että propertyt eivät ole undefined (!-merkintä), 
     koska ne alustetaan newGame()-metodissa aina kun peli alkaa. Niitä on siis 
     turha alustaa konstruktorissa. 
@@ -21,10 +23,12 @@ export class Board implements OnInit {
   xIsNext!: boolean; // Kertoo kumpi on seuraavaksi vuorossa
   winner!: string; // Kertoo voittajan '', 'X' tai '0'
   moves!: number; // Kertoo, montako siirtoa on tehty
-  noWinner!: string;
+  noWinner!: string; //käytetään tasapeli tilanteessa näyttämään "tasapeli"
+  scores = { X: 0, O: 0 };
 
   ngOnInit() {
     this.newGame(); // newGame suoritetaan aina kun komponentti latautuu muistiin
+    this.scores = this.scoreService.getScores();
   }
   // newGame() -metodin suoritus käynnistää uuden pelin
   newGame() {
@@ -105,9 +109,14 @@ export class Board implements OnInit {
         this.squares[a] === this.squares[b] &&
         this.squares[a] === this.squares[c]
       ) {
+        this.scoreService.addScore(this.squares[a]);
         return this.squares[a]; // palautetaan 'X' tai '0'
       }
     }
     return ''; // ei voittajaa
+  }
+
+  reset() {
+    this.scoreService.initScores();
   }
 }
