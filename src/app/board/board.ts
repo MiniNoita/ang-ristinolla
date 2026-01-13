@@ -6,6 +6,7 @@ sovelluslogiikan.
 import { Component, OnInit } from '@angular/core';
 import { Square } from '../square/square';
 import { ScoreService } from '../score.service';
+import { Score } from '../score';
 
 @Component({
   selector: 'app-board',
@@ -24,7 +25,7 @@ export class Board implements OnInit {
   winner!: string; // Kertoo voittajan '', 'X' tai '0'
   moves!: number; // Kertoo, montako siirtoa on tehty
   noWinner!: string; //käytetään tasapeli tilanteessa näyttämään "tasapeli"
-  scores = { X: 0, O: 0 };
+  scores!: Score;
 
   ngOnInit() {
     this.newGame(); // newGame suoritetaan aina kun komponentti latautuu muistiin
@@ -110,6 +111,7 @@ export class Board implements OnInit {
         this.squares[a] === this.squares[c]
       ) {
         this.scoreService.addScore(this.squares[a]);
+        this.scores = this.scoreService.getScores();
         return this.squares[a]; // palautetaan 'X' tai '0'
       }
     }
@@ -118,5 +120,7 @@ export class Board implements OnInit {
 
   reset() {
     this.scoreService.initScores();
+    this.scores = this.scoreService.getScores();
+    this.newGame();
   }
 }
