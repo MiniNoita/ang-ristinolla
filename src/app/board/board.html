@@ -25,7 +25,7 @@
    -metodille. Event binding: click -event bindataan makeMove($index)
    -metodiin -->
   @for (val of squares; track $index) {
-  <app-square [value]="val" (click)="makeMove($index)"> </app-square>
+  <app-square [value]="val" (click)="makeMove($index)" [line]="line" [index]="$index"> </app-square>
   }
 </div>
 <div>

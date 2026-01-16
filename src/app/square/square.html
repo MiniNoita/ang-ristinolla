@@ -1,4 +1,9 @@
 <!--square-komponentin ainoa tehtävä on valuen esittäminen.
 Kaikki sovelluslogiikka on board-komponentissa. Koska value
 on signaalimuuttuja, se avataan laittamalla sulut perään.-->
-<button>{{value()}}</button>
+
+<button
+  [ngClass]="{ red: index() === line()[0] || index() === line()[1] || index() === line()[2] }"
+>
+  {{ value() }}
+</button>

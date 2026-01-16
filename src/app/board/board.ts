@@ -26,6 +26,7 @@ export class Board implements OnInit {
   moves!: number; // Kertoo, montako siirtoa on tehty
   noWinner!: string; //käytetään tasapeli tilanteessa näyttämään "tasapeli"
   scores!: Score;
+  line!: number[];
 
   ngOnInit() {
     this.newGame(); // newGame suoritetaan aina kun komponentti latautuu muistiin
@@ -47,6 +48,7 @@ export class Board implements OnInit {
     this.winner = '';
     this.moves = 0;
     this.noWinner = '';
+    this.line = [];
   }
 
   /*
@@ -112,6 +114,7 @@ export class Board implements OnInit {
       ) {
         this.scoreService.addScore(this.squares[a]);
         this.scores = this.scoreService.getScores();
+        this.line = line;
         return this.squares[a]; // palautetaan 'X' tai '0'
       }
     }
