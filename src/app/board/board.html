@@ -1,35 +1,48 @@
-<!-- (click) on event binding. Templaatin event on bindattu luokan metodiin-->
-<button (click)="newGame()">Uusi peli</button>
-<!-- nollaa pelitilanne -->
-<button (click)="reset()">Nollaa pisteet</button>
+<div class="d-flex justify-content-center gap-3 p-3">
+  <!-- (click) on event binding. Templaatin event on bindattu luokan metodiin-->
+  <button type="button" class="btn btn-outline-dark" (click)="newGame()">Uusi peli</button>
+  <!-- nollaa pelitilanne -->
+  <button type="button" class="btn btn-outline-dark" (click)="reset()">Nollaa pisteet</button>
+</div>
 
-<!-- Kappale näytetään vain jos winner on true eli winner on olemassa-->
-<!-- Muutettu niin, että, jos winner on olemassa, näytetään voittaja, jos voittajaa ei ole olemassa ja siirtoja on 9, on tasapeli. Muulloin näytetään, kenen vuoro on -->
-@if(winner){
-<p>Pelaaja {{ winner }} voitti pelin!</p>
-}@else if (noWinner) {
-<p>{{ noWinner }}</p>
-} @else {
-<p>Vuorossa pelaaja: {{ player }}</p>
-}
+<div class="container d-grid">
+  <div class="m-auto text-center">
+    <!-- Kappale näytetään vain jos winner on true eli winner on olemassa-->
+    <!-- Muutettu niin, että, jos winner on olemassa, näytetään voittaja, jos voittajaa ei ole olemassa ja siirtoja on 9, on tasapeli. Muulloin näytetään, kenen vuoro on -->
+    @if(winner){
+    <h3>Pelaaja {{ winner }} voitti pelin!</h3>
+    }@else if (noWinner) {
+    <h3>{{ noWinner }}</h3>
+    } @else {
+    <p>Vuorossa pelaaja:</p>
+    <h4>{{ player }}</h4>
+    }
 
-<p>Siirtoja tehty: {{ moves }}</p>
+    <p>Siirtoja tehty: {{ moves }}</p>
 
-<!--Peli tehdään tämän divin sisälle. Sisällä olevat elementit on laitettu CSS-gridiin.-->
-<div class="board">
-  <!--@for toistaa  app-square -elementtiä niin kauan kuin
+    <!--Peli tehdään tämän divin sisälle. Sisällä olevat elementit on laitettu CSS-gridiin.-->
+    <!-- <div class="container">
+      <div class="col-8 p-5"> -->
+    <div class="board">
+      <!--@for toistaa  app-square -elementtiä niin kauan kuin
     squares-taulukossa on alkioita, eli 9 kertaa -->
-  <!-- val bindataan square-komponentin value-muuttujaan
+      <!-- val bindataan square-komponentin value-muuttujaan
          se viittaa siis squares-taulukon alkoihin -->
-  <!-- taulukon jokaisen alkion index välitetään makeMove($index)
+      <!-- taulukon jokaisen alkion index välitetään makeMove($index)
    -metodille. Event binding: click -event bindataan makeMove($index)
    -metodiin -->
-  @for (val of squares; track $index) {
-  <app-square [value]="val" (click)="makeMove($index)" [line]="line" [index]="$index"> </app-square>
-  }
-</div>
-<div>
-  <h3>Pelitilanne</h3>
-  <p>X - O</p>
-  <p>{{ scores.X }} - {{ scores.O }}</p>
+      @for (val of squares; track $index) {
+      <app-square [value]="val" (click)="makeMove($index)" [line]="line" [index]="$index">
+      </app-square>
+      }
+    </div>
+    <!-- </div>
+    </div> -->
+
+    <div>
+      <h3>Pelitilanne</h3>
+      <h4>X - O</h4>
+      <p>{{ scores.X }} - {{ scores.O }}</p>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,5 @@
 .board {
-    display: grid;
-        grid-template-rows: 60px 60px 60px;
-        grid-template-columns: 60px 60px 60px;
-    }
+  display: grid;
+  grid-template-rows: 90px 90px 90px;
+  grid-template-columns: 90px 90px 90px;
+}
